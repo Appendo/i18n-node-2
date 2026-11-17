@@ -40,7 +40,10 @@ var i18n = module.exports = function (opt) {
 	var self = this;
 
 	// Put into dev or production mode
-	this.devMode = true;//process.env.NODE_ENV !== "production";
+	// Dev mode writes missing keys back into the locale files and skips the
+	// locale cache, so it is opt-in: I18N_DEV_MODE=true, or devMode in the
+	// options below. Off by default in every environment (WhistleSystem #309).
+	this.devMode = process.env.I18N_DEV_MODE === "true";
 
 	// Copy over options
 	for (var prop in opt) {
